@@ -1,15 +1,17 @@
 # Libraries
 import sys
 import os
-import glob
+from glob import glob
 
 import cv2
 
 import math
+
 import matplotlib
 import matplotlib.pyplot as plt
 
 import numpy as np
+from fontTools.misc.bezierTools import epsilon
 from numpy import ndarray
 
 
@@ -21,17 +23,17 @@ def convert_img_to_data(file_name: str) -> ndarray:
 
 # Function: Loading images into memory with their file data.
 def load_img_into_memory(directory: str) -> list:
-    img_data = []
+    img_data_arr = []
 
-    image_files = glob.glob(directory)
+    image_files = glob(directory)
     image_files.sort()
 
     # Convert file data into matrix
     for file_name in image_files:
         data = convert_img_to_data(file_name)
-        img_data.append(data)
+        img_data_arr.append(data)
 
-    return img_data
+    return img_data_arr
 
 # Function: Applies a Canny Filter to process an Image to provide the computer a reference for edge detection.
 def apply_canny_on_img(file_data: ndarray) -> ndarray:
@@ -46,10 +48,35 @@ def apply_canny_on_img(file_data: ndarray) -> ndarray:
 
     return img_canny
 
+def extract_document_corners(file_data: ndarray) -> ndarray:
+    largest_quadrilateral = None
+    max_area = 0
+    
+    contours, _ = cv2.findContours(file_data, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+
+    for contour in contours:
+        tolerance = cv2.arcLength(contour, True) * 0.02
+        approximation = cv2.approxPolyDP(contour, tolerance, True)
+        
+        # Checks to see if the 
+        if len(approximation) == 4:
+            area = cv2.contourArea(approximation)
+            
+            if area > max_area:
+                max_area = area
+                largest_quadrilateral = approximation
+
+    if largest_quadrilateral is not None:
+
+        return largest_quadrilateral.reshape(4, 2)
+    else:
+
+        return np.array([])
+
 ## canny -> detect the strongest edges -> apply homography -> threshold -> run through ocr model -> get text
 
 if __name__ == '__main__':
-    file_to_load = input(f"Enter the file directory to process into text.")
+    file_to_load = input(f"Enter the file directory to process.")
 
     some_variable_name = load_img_into_memory(file_to_load)
 
