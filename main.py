@@ -172,7 +172,7 @@ def apply_perspective_warp(img_data: ndarray, corners: ndarray) -> ndarray:
     return warped_img
 
 if __name__ == '__main__':
-    file_to_load = "img/LineWritten.jpeg" # input(f"Enter the file directory to process.")
+    file_to_load = input(f"Enter the file directory to process.")
 
     img_files = load_img_into_memory(file_to_load)
 
