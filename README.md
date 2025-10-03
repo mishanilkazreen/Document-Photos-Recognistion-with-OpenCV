@@ -69,7 +69,7 @@ This project transforms images of documents into flat, readable views by detecti
 * [![](https://img.shields.io/badge/PaddlePaddle-FF4088?style=for-the-badge&logo=pytorch&logoColor=white)][Vue-url]
 * [![](https://img.shields.io/badge/PaddleOCR-33CCFF?style=for-the-badge&logo=github&logoColor=white)][Angular-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+ 
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -113,15 +113,16 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+ 
 
----
+<!-- USAGE EXAMPLES -->
 
 ## OCR Engine
 
 Implemented using [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR), a powerful OCR engine supporting multiple languages and scripts.
 
----
+<!-- USAGE EXAMPLES -->
+
 
 ## Configuration
 
@@ -129,7 +130,7 @@ The language for OCR recognition is set in: English
 
 Update the `LANG` variable to specify the desired OCR language(s).
 
----
+<!-- USAGE EXAMPLES -->
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -150,7 +151,7 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+ 
 
 
 
@@ -161,7 +162,7 @@ Mishanil - mishanil@dockly.uk
 
 Project Link: [https://github.com/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV](https://github.com/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV#)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+ 
 
 
 
@@ -170,7 +171,7 @@ Project Link: [https://github.com/mishanilkazreen/Document-Photos-Recognistion-w
 
 * [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+ 
 
 
 
