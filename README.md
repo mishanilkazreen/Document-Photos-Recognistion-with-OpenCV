@@ -1,12 +1,10 @@
 
 
-![Contributors](https://img.shields.io/github/contributors/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV.svg)
-![Forks](https://img.shields.io/github/forks/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV.svg)
-![Stars](https://img.shields.io/github/stars/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV.svg)
-![Issues](https://img.shields.io/github/issues/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV.svg)
-![License](https://img.shields.io/github/license/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV.svg)
-
-
+![Contributors](https://img.shields.io/github/contributors/mishanilkazreen/Document-Text-Recognistion.svg)
+![Forks](https://img.shields.io/github/forks/mishanilkazreen/Document-Text-Recognistion.svg)
+![Stars](https://img.shields.io/github/stars/mishanilkazreen/Document-Text-Recognistion.svg)
+![Issues](https://img.shields.io/github/issues/mishanilkazreen/Document-Text-Recognistion.svg)
+![License](https://img.shields.io/github/license/mishanilkazreen/Document-Text-Recognistion.svg)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -17,7 +15,7 @@
   <p align="center">
     An OpenCV and OCR project detecting text from photos taken with cameras.
     <br />
-    <a href="https://github.com/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/mishanilkazreen/Document-Text-Recognistion"><strong>Explore the docs »</strong></a>
     <br />
     <br />
   </p>
@@ -77,7 +75,7 @@ This project transforms images of documents into flat, readable views by detecti
 1. Clone the repository:
 
 ```sh
-    git clone https://github.com/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV.git
+    git clone https://github.com/mishanilkazreen/Document-Text-Recognistion.git
     cd your-project
 ```
 
@@ -149,7 +147,7 @@ Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 
 Mishanil - mishanil@dockly.uk
 
-Project Link: [https://github.com/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV](https://github.com/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV#)
+Project Link: [https://github.com/mishanilkazreen/Document-Text-Recognistion](https://github.com/mishanilkazreen/Document-Text-Recognistion#)
 
  
 
