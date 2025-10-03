@@ -83,7 +83,7 @@ def extract_document_corners(file_data: ndarray) -> ndarray:
     if lines is None:
         return None
 
-    lines.reshape(-1, 2) # Convert to a 2D matrix
+    lines = lines.reshape(-1, 2) # Convert to a 2D matrix
 
     for i in range(len(lines)):
 
@@ -120,8 +120,8 @@ def extract_document_corners(file_data: ndarray) -> ndarray:
 ## canny -> detect the strongest edges -> apply homography -> threshold -> run through ocr model -> get text
 
 if __name__ == '__main__':
-    file_to_load = "img/LinedPaperTemplate.png" # input(f"Enter the file(s) directory to process.")
+    file_to_load = "img/LinedPaperTemplate.png" # input(f"Enter the file directory to process.")
 
     some_variable_name = load_img_into_memory(file_to_load)
-    some_data_name = extract_document_corners(some_variable_name[0])
+    some_corner_name = extract_document_corners(some_variable_name[0])
 
