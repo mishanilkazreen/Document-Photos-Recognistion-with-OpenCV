@@ -11,9 +11,9 @@ from numpy import ndarray
 
 # Function: Converting image files into matrices to operate and calculate on.
 def convert_img_to_data(file_name: str) -> ndarray:
-    file_data = cv2.imread(file_name, cv2.IMREAD_COLOR) # Reading as BGR colour data
+    img_data = cv2.imread(file_name, cv2.IMREAD_COLOR) # Reading as BGR colour data
 
-    return file_data
+    return img_data
 
 # Function: Loading images into memory with their file data.
 def load_img_into_memory(directory: str) -> list:
@@ -30,7 +30,7 @@ def load_img_into_memory(directory: str) -> list:
     return img_data_arr
 
 # Function: Applies a Canny Filter to process an Image to provide the computer a reference for edge detection.
-def apply_canny_on_img(file_data: ndarray) -> ndarray:
+def apply_canny_on_img(img_data: ndarray) -> ndarray:
     canny_params = dict(
         threshold1=80,
         threshold2=120
@@ -40,7 +40,7 @@ def apply_canny_on_img(file_data: ndarray) -> ndarray:
         sigmaX=0
     )
 
-    img_grey = cv2.cvtColor(file_data, cv2.COLOR_BGR2GRAY)
+    img_grey = cv2.cvtColor(img_data, cv2.COLOR_BGR2GRAY)
     img_blur = cv2.GaussianBlur(img_grey, **gaussian_blur_params) # Blurring reduces noise, providing better processing with Canny
     img_canny = cv2.Canny(img_blur, **canny_params)
 
@@ -71,7 +71,7 @@ def find_intersection(line_1: ndarray, line_2: ndarray) -> ndarray:
         return None
 
 # Function: Processing an image and obtaining line intersections, and grabbing the corners of the object
-def extract_document_corners(file_data: ndarray) -> ndarray:
+def extract_document_corners(img_data: ndarray) -> ndarray:
     line_intersections = []
     hough_lines_params = dict(
         rho=1,
@@ -79,7 +79,7 @@ def extract_document_corners(file_data: ndarray) -> ndarray:
         threshold=180
     )
 
-    canny_img = apply_canny_on_img(file_data) # Pre-processing for Hough Transform
+    canny_img = apply_canny_on_img(img_data) # Pre-processing for Hough Transform
 
     # https://learnopencv.com/hough-transform-with-opencv-c-python/
     lines = cv2.HoughLines(canny_img, **hough_lines_params)
@@ -98,12 +98,12 @@ def extract_document_corners(file_data: ndarray) -> ndarray:
                 x, y = cords
 
                 # Check to make sure the coordinates are in the file resolution
-                if 0 <= x < file_data.shape[1] and 0 <= y < file_data.shape[0]:
+                if 0 <= x < img_data.shape[1] and 0 <= y < img_data.shape[0]:
                     line_intersections.append(cords)
 
     line_intersections = np.array(line_intersections) # Convert array -> ndarray
 
-    if len(line_intersections) < 4: # We need at least 4 intersections otherwise we won't be able to formulate a quadrilateral :(
+    if len(line_intersections) < 4: # We need at least 4 intersections otherwise we won't be able to formulate a quadrilateral
         return None
 
     # Heuristical Approach. We will obtain the furthest point intersections based on region
@@ -120,6 +120,26 @@ def extract_document_corners(file_data: ndarray) -> ndarray:
 
     return corners
 
+# Function: Applies homography and a perspective warp to achieve a flat document view
+def apply_perspective_warp(img_data: ndarray, corners: ndarray) -> ndarray:
+    a4_width = 1000
+    a4_height = int(a4_width * np.sqrt(2))
+    # Creating a resolution of A4 Ratio as a reference for the warp, and to set the new resolution to
+    destination_points = np.array([
+        [0,0],
+        [a4_width-1, 0],
+        [a4_width-1, a4_height-1],
+        [0, a4_height-1]
+    ], dtype=np.float32)
+
+    homography_matrix, retval = cv2.findHomography(corners, destination_points)
+
+    if retval is None:
+        return None
+
+    warped_img = cv2.warpPerspective(img_data, homography_matrix, (a4_width, a4_height))
+
+    return warped_img
 
 ## canny -> detect the strongest edges -> apply homography -> threshold -> run through ocr model -> get text
 
