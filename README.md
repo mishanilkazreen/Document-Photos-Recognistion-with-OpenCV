@@ -15,7 +15,7 @@
   <h2 align="center">Document Text Detection</h2>
 
   <p align="center">
-    An OpenCV and OCR project detecting text from photos taken from cameras.
+    An OpenCV and OCR project detecting text from photos taken with cameras.
     <br />
     <a href="https://github.com/mishanilkazreen/Document-Photos-Recognistion-with-OpenCV"><strong>Explore the docs »</strong></a>
     <br />
@@ -120,17 +120,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## OCR Engine
 
 Implemented using [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR), a powerful OCR engine supporting multiple languages and scripts.
-
-<!-- USAGE EXAMPLES -->
-
-
-## Configuration
-
-The language for OCR recognition is set in: English
-
-Update the `LANG` variable to specify the desired OCR language(s).
-
-<!-- USAGE EXAMPLES -->
 
 <!-- CONTRIBUTING -->
 ## Contributing
