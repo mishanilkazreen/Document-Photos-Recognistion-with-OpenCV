@@ -107,12 +107,8 @@ Install dependenices using pip:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+Take a photo of the top level of a document with a plain background and place the photo in the `img` directory. Any objects within the photo or a change in depth can cause issues related to image cropping.
  
-
 <!-- USAGE EXAMPLES -->
 
 ## OCR Engine
