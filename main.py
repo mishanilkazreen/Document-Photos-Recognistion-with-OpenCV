@@ -9,6 +9,36 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy import ndarray
 
+# Setting up OCR
+import config.settings as settings
+from paddleocr import PaddleOCR
+
+ocr = PaddleOCR(
+    # We have our own inbuilt perspective warp
+    use_doc_orientation_classify=False,
+    use_doc_unwarping=False,
+    use_textline_orientation=False,
+
+    lang=settings.LANG,
+)
+
+# Function: Resizing image data with an aspect ratio given width
+def resize_to_width(img_data: ndarray, target_width: int) -> tuple[float, ndarray]:
+    height, width = img_data.shape[:2]
+
+    aspect_ratio = target_width / width
+    target_height = int(height * aspect_ratio)
+
+    img_data = cv2.resize(img_data, (target_width, target_height), interpolation=cv2.INTER_AREA)
+
+    return aspect_ratio, img_data
+
+# Function: Scales coordinates based on scale factor
+def scale_coordinates(coordinates_data: ndarray, scale_factor: float) -> ndarray:
+    scaled_coordinates = (coordinates_data / scale_factor).astype(int)
+
+    return scaled_coordinates
+
 # Function: Converting image files into matrices to operate and calculate on.
 def convert_img_to_data(file_name: str) -> ndarray:
     img_data = cv2.imread(file_name, cv2.IMREAD_COLOR) # Reading as BGR colour data
@@ -141,11 +171,24 @@ def apply_perspective_warp(img_data: ndarray, corners: ndarray) -> ndarray:
 
     return warped_img
 
-## canny -> detect the strongest edges -> apply homography -> threshold -> run through ocr model -> get text
-
 if __name__ == '__main__':
-    file_to_load = "img/LinedPaperTemplate.png" # input(f"Enter the file directory to process.")
+    file_to_load = "img/LineWritten.jpeg" # input(f"Enter the file directory to process.")
 
-    some_variable_name = load_img_into_memory(file_to_load)
-    some_corner_name = extract_document_corners(some_variable_name[0])
+    img_files = load_img_into_memory(file_to_load)
 
+    for img_file in img_files:
+        aspect_ratio, img_file_downsized = resize_to_width(img_file, 800) # Improves performance with pre-processing when scaling down
+
+        corner_data_downsized = extract_document_corners(img_file_downsized)
+        corner_data_normal = scale_coordinates(corner_data_downsized, aspect_ratio) # Return coordinates for the original image
+
+        warped_img = apply_perspective_warp(img_file, corner_data_normal)
+
+        result = ocr.predict(warped_img)
+
+        for page in result:
+            record_texts = page.get('rec_texts', [])
+            record_scores = page.get('rec_scores', [])
+
+            for text, score in zip(record_texts, record_scores):
+                print(f'Text: {text}, Confidence Level: {score:.2f}')

@@ -1,0 +1,1 @@
+LANG = 'en' # Change based on language of the text
