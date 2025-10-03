@@ -35,9 +35,13 @@ def apply_canny_on_img(file_data: ndarray) -> ndarray:
         threshold1=80,
         threshold2=120
     )
+    gaussian_blur_params = dict(
+        ksize=(5,5),
+        sigmaX=0
+    )
 
     img_grey = cv2.cvtColor(file_data, cv2.COLOR_BGR2GRAY)
-    img_blur = cv2.GaussianBlur(img_grey, (5, 5), 0) # Blurring reduces noise, providing better processing with Canny
+    img_blur = cv2.GaussianBlur(img_grey, **gaussian_blur_params) # Blurring reduces noise, providing better processing with Canny
     img_canny = cv2.Canny(img_blur, **canny_params)
 
     return img_canny
