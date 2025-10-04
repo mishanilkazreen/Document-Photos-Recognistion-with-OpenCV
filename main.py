@@ -74,7 +74,7 @@ def apply_canny_on_img(img_data: ndarray) -> ndarray:
     return img_canny
 
 # Function: Conducts a matrix multiplication to find the intersection points between two lines
-# Goal (x,y) from: p = x*sin(theta) + y*sin(theta)
+# Goal (x,y) from: p = x*cos(theta) + y*sin(theta)
 def find_intersection(line_1: ndarray, line_2: ndarray) -> ndarray:
     rho_1, theta_1 = line_1
     rho_2, theta_2 = line_2
@@ -130,7 +130,7 @@ def extract_document_corners(img_data: ndarray) -> ndarray:
 
     line_intersections = np.array(line_intersections) # Convert array -> ndarray
 
-    if len(line_intersections) < 4: # We need at least 4 intersections otherwise we won't be able to formulate a quadrilateral
+    if len(line_intersections) < 4: # We need at least 4 intersections, otherwise we won't be able to formulate a quadrilateral
         return None
 
     # Heuristical Approach. We will obtain the furthest point intersections based on region
