@@ -3,9 +3,6 @@ from glob import glob
 
 import cv2
 
-import matplotlib
-import matplotlib.pyplot as plt
-
 import numpy as np
 from numpy import ndarray
 
