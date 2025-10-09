@@ -48,7 +48,6 @@ class CoordinateScaler:
 
 class ImageLoader:
     # Function: Converting image files into matrices to operate and calculate on.
-    @staticmethod
     def convert_img_to_data(file_name: str) -> ndarray:
         img_data = cv2.imread(file_name, cv2.IMREAD_COLOR)  # Reading as BGR colour data
 
