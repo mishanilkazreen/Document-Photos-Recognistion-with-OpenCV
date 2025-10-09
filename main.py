@@ -189,3 +189,4 @@ if __name__ == '__main__':
 
             for text, score in zip(record_texts, record_scores):
                 print(f'Text: {text}, Confidence Level: {score:.2f}')
+
